@@ -1,0 +1,5 @@
+DEBUG:root:hey
+INFO:root:hoy
+WARNING:root:soy
+ERROR:root:hooo
+CRITICAL:root:yooo

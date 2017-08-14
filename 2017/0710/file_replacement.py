@@ -29,7 +29,7 @@ def subs_file(file, file_new, words):
 
     lines = lines2
     lines2 = []
-    
+
   write_file.write(''.join(lines)) # 書き込み
   read_file.close()
   write_file.close()
