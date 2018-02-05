@@ -1,0 +1,1 @@
+Moving a node toward its neighbors direction is also effective when most of the neighbors forms a group. In this case, the move often clarifies the boundary of the cluster.

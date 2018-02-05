@@ -1,0 +1,14 @@
+INFO:root:1000000 times iteration, TASK : APPEND
+INFO:root:1000000 times iteration, TASK : APPEND
+INFO:root:dtype: list [9.126806259155273e-08 sec]
+INFO:root:dtype: set [1.3206911087036134e-07 sec]
+INFO:root:dtype: dictionary [3.481910228729248e-07 sec]
+INFO:root:dtype: deque [9.1965913772583e-08 sec]
+INFO:root:100000000 times iteration, TASK : APPEND
+INFO:root:dtype: list [8.894834995269776e-08 sec]
+INFO:root:dtype: deque [9.47039008140564e-08 sec]
+INFO:root:100000000 times iteration, TASK : APPEND
+INFO:root:dtype: dictionary [3.7313523054122925e-07 sec]
+INFO:root:dtype: list [9.30065107345581e-08 sec]
+INFO:root:dtype: set [1.765317392349243e-07 sec]
+INFO:root:dtype: deque [1.0142421007156373e-07 sec]

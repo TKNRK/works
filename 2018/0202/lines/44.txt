@@ -1,0 +1,1 @@
+A clustering coefficient is a measure of the degree to which nodes in a graph tend to cluster together.

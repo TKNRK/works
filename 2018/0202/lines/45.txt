@@ -1,0 +1,1 @@
+Then I'm applying this filter by setting the minimum values.

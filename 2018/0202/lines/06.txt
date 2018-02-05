@@ -1,0 +1,1 @@
+Each node represents a blog site

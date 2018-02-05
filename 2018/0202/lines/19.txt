@@ -1,0 +1,1 @@
+When I start dragging, all the nodes start moving. So, please watch the whole image while I am dragging.

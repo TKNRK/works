@@ -1,0 +1,69 @@
+Hi! My name is Riku Takano. Today, I would like to introduce Social Viewpoint Finder, or SVF.
+Social Viewpoint Finder is an interactive network analysis tool.
+A strength of SVF is its cluster finding capability.
+Let's launch SVF and start visual analytics.
+The first example is a Blogosphere at the time of 2004 US presidential election.
+This visualization illustrates the inter-blog network
+Each node represents a blog site
+and an edge represents article citation.
+Let me click on a random blog site node.
+The URL is shown in this text box.
+It reads "urbandemocracy.blogspot".
+I think it corresponds to one of the democrats supporters's blog site.
+Now, we are starting network analysis.
+Firstly we apply filter based on social centrality indices.
+We support several important centrality indices.
+Let me choose a filter based on closeness centrality.
+Then I am adjusting the thresholds values.
+Even after filtering, we paint them with faint color so that we can locate the filtered content in its global context.
+Now I'm going to drag a node.
+When I start dragging, all the nodes start moving. So, please watch the whole image while I am dragging.
+Let me drag some more nodes.
+As you see, after a few dragging, I have successfully exposed the bipolar networking structure.
+Let's examine, what these two clusters represent.
+The URL of this node is "unodemocrats.com/blog".
+The URL of this node is "blog.johnkerry.com".
+The URL of this node is "theblueview.blogspot.com". Blue is the color of the Democrats.
+I think that these blog sites support Democrats.
+Let's examine the other cluster.
+I found a blog site "gopbloggers.org". GOP (Grand Old Party) is a former name of the Republican Party.
+The URL of this node is against Hillary. It is clearly anti-Democrats. It must be a supporter of the Republicans.
+I found a blog site "blogsforbush.com". This is the supporter of George W. Bush.
+I hope you liked Social Viewpoint Finder?
+However some of you may not be convinced.
+Everybody knows that US political scene consists of two big parties.
+You may wonder if SVF can expose unknown structure of an unknown dataset.
+We try to answer that question with another the next visual analytics session.
+The next example is a reference network of Math-related pages found in Japanese Wikipedia articles.
+Each node in this visualization represents a Math article and each edge represents a page reference.
+Let me pick an node.
+This node represents a page whose title is "Geometry".
+This node represents a page whose title is "Ceva's theorem".
+Let's investigate the structure of this network
+Firstly we apply filtering.
+I'm going to apply a filter based on "clustering coefficient".
+A clustering coefficient is a measure of the degree to which nodes in a graph tend to cluster together.
+Then I'm applying this filter by setting the minimum values.
+As we have seen in the previous demo, the filter grays out the filtered nodes and you still can see them painted in faint color.
+Now I'm starting the fun part. Dragging!
+YES! We are lucky today. The very first dragging exposed a cluster.
+You may think that I am searching for a special node.
+NO. I am just touching random nodes and try to observe if it is interesting.
+From my experience, I learned that dragging a node that is connected to many others tend to cause interesting reshaping of the whole network structure.
+In dragging a node, I often move it to an open space, trying to untangle the network structure
+Moving a node toward its neighbors direction is also effective when most of the neighbors forms a group. In this case, the move often clarifies the boundary of the cluster.
+Let me drag some more nodes.
+Now we have identified 4 clusters. Let's find what they represent.
+The node titles of this cluster are "digon", "tridecagon", "hexadecagon", ...
+They are all names of geometric shape. We found a cluster of geometric shapes.
+Let's move on to this cluster. Their titles read "Small Icosihemidodecahedron", "triakis icosahedron", "triakis octahedron", ... 
+This seems to be a cluster of solid shapes.
+Ok. The cluster we have previously identified seems to be a group of plane shapes.
+This cluster contains names "Subgame perfect equilibrium", "Extensive-form game",...
+This seems to be a cluster of game theory.
+This cluster contains names. Because we are looking at Math-related dataset, this must be a cluster of famous mathematicians.
+There still remains some more nodes nodes in the center. If you care about them, please visit our demo site.
+This is the end of the demo. I hope you enjoyed the simple but unique and powerful analytic user interface of SVF.
+We are waiting for your visit at IUI 18 demo session. See you!
+This seems to be a cluster of blog sites supporting Republicans.
+This seems to be a cluster of blog sites supporting Democrats.

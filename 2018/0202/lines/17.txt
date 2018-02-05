@@ -1,0 +1,1 @@
+Even after filtering, we paint them with faint color so that we can locate the filtered content in its global context.

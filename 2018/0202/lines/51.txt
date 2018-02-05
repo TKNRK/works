@@ -1,0 +1,1 @@
+From my experience, I learned that dragging a node that is connected to many others tend to cause interesting reshaping of the whole network structure.
