@@ -4,17 +4,26 @@ from PyQt5.QtCore import pyqtSignal, Qt
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 from PyQt5.Qt import QFont
-import qdarkstyle
 from logging import getLogger, StreamHandler, DEBUG
 
 from audio_widget import AudioWidget
 
 logger = getLogger(__name__)
-handler = StreamHandler()
-handler.setLevel(DEBUG)
+# handler = StreamHandler()
+# handler.setLevel(DEBUG)
 logger.setLevel(DEBUG)
-logger.addHandler(handler)
-logger.propagate = False
+# logger.addHandler(handler)
+# logger.propagate = False
+
+
+"""
+TODO:
+
+- AudioThread の録音を任意のタイミングで終了する機能を追加する
+- AudioThread で録音開始，録音終了の状態に応じてアイコンを変える
+- 作成したThread の解放（メモリリークが起きる？）
+- logger の handler とかを調べる
+"""
 
 
 class AudioSample(QWidget):
@@ -39,7 +48,6 @@ class AudioSample(QWidget):
   @classmethod
   def start(cls, fullscreen=False):
     cls.app = QApplication(sys.argv)
-    cls.app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     widget = cls()
     widget.resize(300, 100)
     widget.move(650, 50)

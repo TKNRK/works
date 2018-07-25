@@ -1,7 +1,6 @@
 from PyQt5.QtCore import pyqtSignal, Qt, QMutexLocker, QMutex, QThread
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
-import qdarkstyle
 import datetime
 import pyaudio
 import wave
@@ -10,19 +9,20 @@ import sys
 from logging import getLogger, StreamHandler, DEBUG
 
 logger = getLogger(__name__)
-handler = StreamHandler()
-handler.setLevel(DEBUG)
+# handler = StreamHandler()
+# handler.setLevel(DEBUG)
 logger.setLevel(DEBUG)
-logger.addHandler(handler)
-logger.propagate = False
+# logger.addHandler(handler)
+# logger.propagate = False
 
-class AudioThread(QThread):
+
+class RecordThread(QThread):
 
   def __init__(self, parent=None):
     super().__init__(parent)
     # プロパティの設定
     self.RECORD_SECONDS = 5 #録音する時間の長さ（秒）
-    self.iDeviceIndex = 0 #録音デバイスのインデックス番号
+    self.iDeviceIndex = 0 #録音デバイスのインデックス番号 
     self.FORMAT = pyaudio.paInt16 #音声のフォーマット
     self.CHANNELS = 1             #モノラル
     self.RATE = 44100             #サンプルレート
@@ -31,7 +31,7 @@ class AudioThread(QThread):
   def run(self):
     logger.info('Start AudioThread...')
     now = datetime.datetime.now()
-    WAVE_OUTPUT_FILENAME = 'wav/wav{}.wav'.format(now.strftime('%Y-%m%d-%H%M%S'))
+    WAVE_OUTPUT_FILENAME = 'wav/{}.wav'.format(now.strftime('%Y-%m%d-%H%M%S'))
 
     audio = pyaudio.PyAudio()
     stream = audio.open(
@@ -45,6 +45,7 @@ class AudioThread(QThread):
 
     logger.info('Start Recording...')
     frames = []
+    # while(self.recording):
     for i in range(0, int(self.RATE / self.CHUNK * self.RECORD_SECONDS)):
         data = stream.read(self.CHUNK)
         frames.append(data)
@@ -68,6 +69,40 @@ class AudioThread(QThread):
 
   def recording_off(self):
     self.recording = False
+
+
+class PlayThread(QThread):
+
+  def __init__(self, parent=None):
+    super().__init__(parent)
+
+  def run(self):
+    WAVE_INPUT_FILENAME = 'wav/se_maoudamashii_chime01.wav'
+    wav_file = wave.open(WAVE_INPUT_FILENAME, 'rb')
+
+    audio = pyaudio.PyAudio()
+
+    def callback(in_data, frame_count, time_info, status):
+      data = wav_file.readframes(frame_count)
+      return (data, pyaudio.paContinue)
+
+    stream = audio.open(
+                 format = audio.get_format_from_width(wav_file.getsampwidth()),
+                 channels = wav_file.getnchannels(),
+                 rate = wav_file.getframerate(),
+                 output = True,
+                 stream_callback = callback
+              )
+
+    stream.start_stream()
+    while stream.is_active():
+      time.sleep(0.1)
+
+    stream.stop_stream()
+    stream.close()
+    wav_file.close()
+
+    audio.terminate()
 
 
 class AudioWidget(QWidget):
@@ -108,41 +143,17 @@ class AudioWidget(QWidget):
     btn_play.clicked.connect(self.play_rec)
 
   def start_rec(self):
-    self.thread = AudioThread()
-    self.thread.start()
+    self.record_thread = RecordThread()
+    self.record_thread.start()
 
   def play_rec(self):
-    WAVE_INPUT_FILENAME = 'wav/se_maoudamashii_chime01.wav'
-    wav_file = wave.open(WAVE_INPUT_FILENAME, 'rb')
+    self.play_thread = PlayThread()
+    self.play_thread.start()
 
-    audio = pyaudio.PyAudio()
-
-    def callback(in_data, frame_count, time_info, status):
-      data = wav_file.readframes(frame_count)
-      return (data, pyaudio.paContinue)
-
-    stream = audio.open(
-                 format = audio.get_format_from_width(wav_file.getsampwidth()),
-                 channels = wav_file.getnchannels(),
-                 rate = wav_file.getframerate(),
-                 output = True,
-                 stream_callback = callback
-              )
-
-    stream.start_stream()
-    while stream.is_active():
-      time.sleep(0.1)
-
-    stream.stop_stream()
-    stream.close()
-    wav_file.close()
-
-    audio.terminate()
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
     widget = AudioWidget(app.style())
     widget.resize(300, 100)
     widget.move(650, 50)
